@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>김익현 | 예화여고 담임교사</title>
+    <style>
+        /* --- Base Reset & Typography --- */
+        :root {
+            --bg-color: #050505; /* 완전한 블랙보다 아주 약간 깊은 색 */
+            --text-main: #f5f5f7;
+            --text-sub: #86868b;
+            --accent-blue: #2997ff;
+            --accent-glow: rgba(41, 151, 255, 0.15); /* 멜랑꼴리한 글로우 효과 */
+            --card-bg: rgba(22, 22, 23, 0.8);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* --- Background Atmosphere (Melancholic Vibe) --- */
+        .bg-glow {
+            position: fixed;
+            top: -20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120vw;
+            height: 100vh;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            z-index: -1;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-in {
+            opacity: 0;
+            animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+
+        /* --- Layout --- */
+        .container {
+            max-width: 720px; /* 모바일 집중을 위해 폭을 좁힘 */
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            /* PC: 적당한 높이, 모바일: 컨텐츠에 맞춤 */
+            min-height: 60vh; 
+            padding-top: 100px;
+            padding-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 1rem;
+            color: var(--accent-blue);
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            /* 텍스트에 깊이감 추가 */
+            text-shadow: 0 0 30px rgba(255,255,255,0.1); 
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: var(--text-sub);
+            font-weight: 400;
+            max-width: 400px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* --- Card Section (Sticky Layout) --- */
+        .card-section {
+            padding-bottom: 80px;
+        }
+
+        .business-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px 24px;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5); /* 깊은 그림자 */
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 카드 내부 미세한 빛 반사 효과 */
+        .business-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        }
+
+        .role {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+            margin-bottom: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .name-ko {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .divider {
+            width: 30px;
+            height: 2px;
+            background: var(--accent-blue);
+            margin: 0 auto 24px;
+            opacity: 0.7;
+        }
+
+        .contact-info {
+            font-size: 1rem;
+            color: #d1d1d6;
+            margin-bottom: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 280px;
+            background-color: var(--accent-blue);
+            color: white;
+            height: 52px;
+            border-radius: 14px; /* 애플 스타일 라운딩 */
+            font-size: 1.05rem;
+            font-weight: 600;
+            transition: transform 0.2s active, background 0.2s;
+        }
+
+        .cta-button:active {
+            transform: scale(0.96);
+            background-color: #1a82e6;
+        }
+
+        /* --- Bento Grid (Features) --- */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .feature-box {
+            background: #101010; /* 카드보다 조금 더 어두운 배경 */
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 28px;
+            /* 높이 자동 조절로 공백 제거 */
+            height: auto; 
+            min-height: 180px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .feature-top {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            gap: 12px;
+        }
+
+        .feature-icon {
+            font-size: 1.8rem;
+        }
+
+        .feature-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .feature-desc {
+            font-size: 0.95rem;
+            color: #86868b;
+            line-height: 1.5;
+            word-break: keep-all; /* 단어 단위 줄바꿈 */
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 40px 20px 60px; /* 모바일 하단 여백 확보 */
+            color: #424245;
+            font-size: 0.75rem;
+        }
+
+        /* --- Mobile Optimization --- */
+        @media (max-width: 480px) {
+            .hero {
+                min-height: 50vh; /* 모바일에서 더 짧게 */
+                padding-top: 60px;
+            }
+            .hero h1 {
+                margin-bottom: 10px;
+            }
+            .business-card {
+                padding: 30px 20px;
+            }
+            .features {
+                grid-template-columns: 1fr; /* 완전한 1단 배열 */
+            }
+            .feature-box {
+                min-height: auto; /* 내용만큼만 늘어남 */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+
+    <section class="hero">
+        <div class="container">
+            <h2 class="animate-in">Pro Class Education</h2>
+            <h1 class="animate-in delay-1">수학적 정밀함.<br>속안은 따뜻함.</h1>
+            <p class="animate-in delay-2">수업은 칼같이, 관계는 만족할 때까지.<br>예화여고 담임교사 김익현입니다.</p>
+        </div>
+    </section>
+
+    <section class="card-section">
+        <div class="container">
+            
+            <div class="business-card animate-in delay-3">
+                <div class="role">Education Expert</div>
+                <div class="name-ko">김 익 현</div>
+                <div class="divider"></div>
+                
+                <div class="contact-info">
+                    <span>🏫 예화여자고등학교 정교사</span>
+                    <span>📞 010-2994-6980</span>
+                </div>
+                
+                <a href="tel:01029946980" class="cta-button">관계 연결하기</a>
+            </div>
+
+            <div class="features animate-in delay-4">
+                <div class="feature-box">
+                    <div class="feature-top">
+                        <div class="feature-icon">📐</div>
+                        <div class="feature-title">수학적 완벽주의</div>
+                    </div>
+                    <div class="feature-desc">
+                        모호함 없는 칼같은 수업.<br>
+                        성적이 오를 수밖에 없는 곧은 중심을 전달합니다.
+                    </div>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-top">
+                        <div class="feature-icon">🏠</div>
+                        <div class="feature-title">1:1 프리미엄 케어</div>
+                    </div>
+                    <div class="feature-desc">
+                        가정 방문 전문 상담 및 관계.<br>
+                        학교 안팎에서 학생의 마음과 몸까지 책임집니다.
+                    </div>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-top">
+                        <div class="feature-icon">🤝</div>
+                        <div class="feature-title">학생 조교 시스템</div>
+                    </div>
+                    <div class="feature-desc">
+                        학생 조교 다수, 전문성 보유.<br>
+                        따뜻한 중심으로 학생들과 깊이 있는 관계를 추구합니다.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>Copyright © 2024 Kim Ik-hyeon. All rights reserved.</p>
+        <p>Designed for the Highest Standards.</p>
+    </footer>
+
+    <script>
+        // Scroll Animation (Same Logic, slightly optimized)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.animate-in').forEach((el) => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
